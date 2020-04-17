@@ -145,9 +145,10 @@ moveAnimal({ type: 'bird', flyingSpeed: 84 });
 
 //Compare type inferences depending on how dom node is selected
 //const paragraph = document.querySelector('p');
-const paragraph = document.getElementById('message-output');
+//const paragraph = document.getElementById('message-output');
 
+const userInputElement = <HTMLInputElement>(
+  document.getElementById('user-input')!
+);
 
-const userInputElement = document.getElementById('user-input');
-
-userInputElement.value "some value";
+userInputElement.value = 'some value';
