@@ -1,3 +1,18 @@
+//                      TYPEGUARDS
+/*About
+
+and approach that checks if a certain property or method exists before you try to use it.
+
+for objects:
+in
+instanceof
+
+js primitives
+typeof
+
+
+*/
+
 //Object Combination - a UNION SET is created
 type Admin = {
   name: string;
@@ -26,7 +41,6 @@ type Numeric = number | boolean;
 //And set
 type Universal = Combinable & Numeric;
 
-//TYPEGUARDS
 //Help with unions
 
 function add(a: Combinable, b: Combinable) {
@@ -83,7 +97,48 @@ const v2 = new Truck();
 
 function useVehicle(vehicle: Vehicle) {
   vehicle.drive();
+  //instanceof is ES6 not TS
+  //This wouldn't work if Truck was a TS Interface.
   if (vehicle instanceof Truck) {
     vehicle.loadCargo(1000);
   }
 }
+
+useVehicle(v1);
+useVehicle(v2);
+
+//Special Typeguard: Discriminated Union
+
+/*
+
+About
+
+
+*/
+
+interface Bird {
+  type: 'bird';
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+  }
+
+  console.log('Moving at speed: ' + speed);
+}
+
+moveAnimal({ type: 'bird', flyingSpeed: 84 });
