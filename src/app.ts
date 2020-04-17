@@ -43,6 +43,8 @@ type Universal = Combinable & Numeric;
 
 //Help with unions
 
+function add(a: string, b: string): string;
+function add(a: number, b: number): number;
 function add(a: Combinable, b: Combinable) {
   //Runtime logic to perform operations according to the different possiblities
   //of types
@@ -53,124 +55,133 @@ function add(a: Combinable, b: Combinable) {
   return a + b;
 }
 
-//Type Guarding for non-primitive custom object types
-//OR set
-type UnknownEmployee = Employee | Admin;
+const result = add('yo', 'yo');
+result.split(' ');
 
-function printEmployeeInformation(emp: UnknownEmployee) {
-  console.log(`Name: ${emp.name}`);
-  if ('privileges' in emp) {
-    console.log(`Privileges: ${emp.privileges}`);
-  }
+// //Type Guarding for non-primitive custom object types
+// //OR set
+// type UnknownEmployee = Employee | Admin;
 
-  if ('startDate' in emp) {
-    console.log(`Start date: ${emp.startDate}`);
-  }
-}
+// function printEmployeeInformation(emp: UnknownEmployee) {
+//   console.log(`Name: ${emp.name}`);
+//   if ('privileges' in emp) {
+//     console.log(`Privileges: ${emp.privileges}`);
+//   }
 
-printEmployeeInformation(e1);
+//   if ('startDate' in emp) {
+//     console.log(`Start date: ${emp.startDate}`);
+//   }
+// }
 
-printEmployeeInformation({ name: 'ricky', startDate: new Date() });
+// printEmployeeInformation(e1);
 
-//instanceof TYPEGUARD
+// printEmployeeInformation({ name: 'ricky', startDate: new Date() });
 
-class Car {
-  drive() {
-    console.log('Drive');
-  }
-}
+// //instanceof TYPEGUARD
 
-class Truck {
-  drive() {
-    console.log('Driving truck...');
-  }
+// class Car {
+//   drive() {
+//     console.log('Drive');
+//   }
+// }
 
-  loadCargo(num: number) {
-    console.log('Loading Cargo...', num);
-  }
-}
+// class Truck {
+//   drive() {
+//     console.log('Driving truck...');
+//   }
 
-type Vehicle = Car | Truck;
+//   loadCargo(num: number) {
+//     console.log('Loading Cargo...', num);
+//   }
+// }
 
-const v1 = new Car();
-const v2 = new Truck();
+// type Vehicle = Car | Truck;
 
-function useVehicle(vehicle: Vehicle) {
-  vehicle.drive();
-  //instanceof is ES6 not TS
-  //This wouldn't work if Truck was a TS Interface.
-  if (vehicle instanceof Truck) {
-    vehicle.loadCargo(1000);
-  }
-}
+// const v1 = new Car();
+// const v2 = new Truck();
 
-useVehicle(v1);
-useVehicle(v2);
+// function useVehicle(vehicle: Vehicle) {
+//   vehicle.drive();
+//   //instanceof is ES6 not TS
+//   //This wouldn't work if Truck was a TS Interface.
+//   if (vehicle instanceof Truck) {
+//     vehicle.loadCargo(1000);
+//   }
+// }
 
-//Special Typeguard: Discriminated Union
+// useVehicle(v1);
+// useVehicle(v2);
 
-/*
+// //Special Typeguard: Discriminated Union
 
-About
+// /*
 
+// About
 
-*/
+// */
 
-interface Bird {
-  type: 'bird';
-  flyingSpeed: number;
-}
+// interface Bird {
+//   type: 'bird';
+//   flyingSpeed: number;
+// }
 
-interface Horse {
-  type: 'horse';
-  runningSpeed: number;
-}
+// interface Horse {
+//   type: 'horse';
+//   runningSpeed: number;
+// }
 
-type Animal = Bird | Horse;
+// type Animal = Bird | Horse;
 
-function moveAnimal(animal: Animal) {
-  let speed;
-  switch (animal.type) {
-    case 'bird':
-      speed = animal.flyingSpeed;
-      break;
-    case 'horse':
-      speed = animal.runningSpeed;
-  }
+// function moveAnimal(animal: Animal) {
+//   let speed;
+//   switch (animal.type) {
+//     case 'bird':
+//       speed = animal.flyingSpeed;
+//       break;
+//     case 'horse':
+//       speed = animal.runningSpeed;
+//   }
 
-  console.log('Moving at speed: ' + speed);
-}
+//   console.log('Moving at speed: ' + speed);
+// }
 
-moveAnimal({ type: 'bird', flyingSpeed: 84 });
+// moveAnimal({ type: 'bird', flyingSpeed: 84 });
 
-//Compare type inferences depending on how dom node is selected
-//const paragraph = document.querySelector('p');
-//const paragraph = document.getElementById('message-output');
+// //Type Casting
 
-/*
-const userInputElement = <HTMLInputElement>(
-  document.getElementById('user-input')!
-);
-*/
-// const userInputElement = document.getElementById(
-//   'user-input'
-// )! as HTMLInputElement;
+// //Compare type inferences depending on how dom node is selected
+// //const paragraph = document.querySelector('p');
+// //const paragraph = document.getElementById('message-output');
 
-// userInputElement.value = 'some value';
+// /*
+// const userInputElement = <HTMLInputElement>(
+//   document.getElementById('user-input')!
+// );
+// */
+// // const userInputElement = document.getElementById(
+// //   'user-input'
+// // )! as HTMLInputElement;
 
-const userInputElement = document.getElementById('user-input');
+// // userInputElement.value = 'some value';
 
-if (userInputElement) {
-  (userInputElement as HTMLInputElement).value = 'some value';
-}
+// const userInputElement = document.getElementById('user-input');
 
-//{email: 'blah blah blah email message', isusername: 'blah blah blah some username message'}
-//Below is flexible container, can add anything that adheres to vague rules
-interface ErrorContainer {
-  [prop: string]: string;
-}
+// if (userInputElement) {
+//   (userInputElement as HTMLInputElement).value = 'some value';
+// }
 
-const errorBag: ErrorContainer = {
-  email: 'not a valid email',
-  payment: 'invalid payment card',
-};
+// //Index Properties
+
+// //{email: 'blah blah blah email message', isusername: 'blah blah blah some username message'}
+// //Below is flexible container, can add anything that adheres to vague rules
+// interface ErrorContainer {
+//   [prop: string]: string;
+// }
+
+// const errorBag: ErrorContainer = {
+//   email: 'not a valid email',
+//   payment: 'invalid payment card',
+//   criminalRecord: 'clean',
+// };
+
+//Function Overloads
