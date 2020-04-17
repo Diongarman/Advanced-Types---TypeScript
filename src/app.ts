@@ -152,8 +152,14 @@ const userInputElement = <HTMLInputElement>(
   document.getElementById('user-input')!
 );
 */
-const userInputElement = document.getElementById(
-  'user-input'
-)! as HTMLInputElement;
+// const userInputElement = document.getElementById(
+//   'user-input'
+// )! as HTMLInputElement;
 
-userInputElement.value = 'some value';
+// userInputElement.value = 'some value';
+
+const userInputElement = document.getElementById('user-input');
+
+if (userInputElement) {
+  (userInputElement as HTMLInputElement).value = 'some value';
+}
