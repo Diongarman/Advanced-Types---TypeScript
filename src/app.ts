@@ -55,3 +55,35 @@ function printEmployeeInformation(emp: UnknownEmployee) {
 }
 
 printEmployeeInformation(e1);
+
+printEmployeeInformation({ name: 'ricky', startDate: new Date() });
+
+//instanceof TYPEGUARD
+
+class Car {
+  drive() {
+    console.log('Drive');
+  }
+}
+
+class Truck {
+  drive() {
+    console.log('Driving truck...');
+  }
+
+  loadCargo(num: number) {
+    console.log('Loading Cargo...', num);
+  }
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(1000);
+  }
+}
