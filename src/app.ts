@@ -45,7 +45,7 @@ type UnknownEmployee = Employee | Admin;
 
 function printEmployeeInformation(emp: UnknownEmployee) {
   console.log(`Name: ${emp.name}`);
-  if (emp.privileges) {
+  if ('privileges' in emp) {
     console.log(`Privileges: ${emp.privileges}`);
   }
 }
