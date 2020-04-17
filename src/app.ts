@@ -48,4 +48,10 @@ function printEmployeeInformation(emp: UnknownEmployee) {
   if ('privileges' in emp) {
     console.log(`Privileges: ${emp.privileges}`);
   }
+
+  if ('startDate' in emp) {
+    console.log(`Start date: ${emp.startDate}`);
+  }
 }
+
+printEmployeeInformation(e1);
