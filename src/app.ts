@@ -163,3 +163,14 @@ const userInputElement = document.getElementById('user-input');
 if (userInputElement) {
   (userInputElement as HTMLInputElement).value = 'some value';
 }
+
+//{email: 'blah blah blah email message', isusername: 'blah blah blah some username message'}
+//Below is flexible container, can add anything that adheres to vague rules
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: 'not a valid email',
+  payment: 'invalid payment card',
+};
