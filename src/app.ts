@@ -58,6 +58,19 @@ function add(a: Combinable, b: Combinable) {
 const result = add('yo', 'yo');
 result.split(' ');
 
+//Optional Chaining
+
+const fetchUserData = {
+  id: 'u1',
+  name: 'Dion',
+  job: { title: 'CEO', description: 'My own company' },
+};
+
+console.log(fetchUserData?.job?.title);
+
+const userInput = null;
+const storedData = userInput ?? 'DEFAULT';
+
 // //Type Guarding for non-primitive custom object types
 // //OR set
 // type UnknownEmployee = Employee | Admin;
